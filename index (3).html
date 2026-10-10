@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RMTV-CPE-PORTFOLIO</title>
+<meta name="description" content="Academic portfolio of Robinn Mil Vinas, Computer Engineering student at Mapúa University.">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg-deep:#10141a;
+    --bg-panel:#171d26;
+    --bg-panel-2:#1c2430;
+    --line:#2a3341;
+    --copper:#e1a85e;
+    --cyan:#62d6c9;
+    --text-primary:#eaedf2;
+    --text-muted:#8c97a8;
+    --radius:2px;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg-deep);
+    color:var(--text-primary);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  .mono{
+    font-family:'IBM Plex Mono',monospace;
+  }
+  a{color:var(--cyan);}
+  a:focus-visible, button:focus-visible, .tab:focus-visible{
+    outline:2px solid var(--cyan);
+    outline-offset:3px;
+  }
+  img{max-width:100%;display:block;}
+
+  /* ---------- layout shell ---------- */
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  section{padding:88px 0;border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--copper);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:14px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;height:1px;background:var(--copper);
+    display:inline-block;
+  }
+  .sheet-no{
+    color:var(--text-muted);
+    margin-left:auto;
+    font-size:11px;
+  }
+
+  h2.section-title{font-size:clamp(28px,4vw,40px);margin-bottom:16px;}
+  .lede{color:var(--text-muted);max-width:640px;font-size:17px;}
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(16,20,26,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:var(--maxw);margin:0 auto;padding:0 24px;
+    display:flex;align-items:center;justify-content:space-between;
+    height:64px;
+  }
+  .nav-brand{font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--text-primary);text-decoration:none;letter-spacing:.03em;}
+  .nav-brand b{color:var(--copper);}
+  .tabs{display:flex;gap:4px;list-style:none;margin:0;padding:0;}
+  .tab{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;text-transform:uppercase;letter-spacing:.08em;
+    color:var(--text-muted);text-decoration:none;
+    padding:10px 14px;border-radius:var(--radius);
+    transition:color .15s ease, background .15s ease;
+  }
+  .tab:hover{color:var(--text-primary);background:var(--bg-panel);}
+  .nav-toggle{display:none;background:none;border:1px solid var(--line);color:var(--text-primary);width:38px;height:38px;border-radius:var(--radius);cursor:pointer;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding-top:96px;
+    position:relative;
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.15fr .85fr;
+    gap:56px;
+    align-items:center;
+  }
+  .kicker{font-family:'IBM Plex Mono',monospace;color:var(--cyan);font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px;display:block;}
+  .hero h1{font-size:clamp(34px,5.4vw,58px);line-height:1.05;}
+  .hero h1 .accent{color:var(--copper);}
+  .tagline{margin-top:20px;color:var(--text-muted);font-size:18px;max-width:520px;}
+  .hero-meta{display:flex;gap:28px;margin-top:32px;flex-wrap:wrap;}
+  .hero-meta div{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-muted);}
+  .hero-meta b{display:block;color:var(--text-primary);font-size:14px;margin-top:2px;font-family:'Inter',sans-serif;}
+  .cta-row{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.04em;
+    padding:13px 22px;border-radius:var(--radius);text-decoration:none;
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .btn-primary{background:var(--copper);color:#171008;font-weight:600;}
+  .btn-ghost{border:1px solid var(--line);color:var(--text-primary);}
+  .btn:hover{filter:brightness(1.08);}
+
+  .photo-col{position:relative;}
+  .photo-frame{
+    aspect-ratio:6/5;
+    background:linear-gradient(160deg,var(--bg-panel-2),var(--bg-panel));
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    display:flex;align-items:center;justify-content:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .photo-frame .ph-label{
+    font-family:'IBM Plex Mono',monospace;color:var(--text-muted);font-size:12px;text-align:center;padding:20px;
+  }
+  .photo-frame img{width:100%;height:100%;object-fit:contain;}
+  .corner-tag{
+    position:absolute;top:12px;left:12px;
+    font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--cyan);
+    border:1px solid var(--cyan);padding:3px 7px;border-radius:var(--radius);
+  }
+
+  .trace-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.35;z-index:-1;}
+
+  /* ---------- datasheet card (About) ---------- */
+  .about-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:56px;align-items:start;}
+  .datasheet{
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+  }
+  .datasheet-head{
+    padding:16px 18px;border-bottom:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;
+  }
+  .datasheet dl{margin:0;padding:6px 18px 18px;}
+  .datasheet .row{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px dashed var(--line);font-size:14px;}
+  .datasheet .row:last-child{border-bottom:none;}
+  .datasheet dt{font-family:'IBM Plex Mono',monospace;color:var(--text-muted);font-size:12px;}
+  .datasheet dd{margin:0;text-align:right;color:var(--text-primary);}
+
+  .about-body p{color:var(--text-muted);margin:0 0 16px;}
+  .about-body strong{color:var(--text-primary);}
+  .chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;}
+  .chip{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;
+    border:1px solid var(--line);color:var(--text-muted);
+    padding:6px 10px;border-radius:var(--radius);
+  }
+
+  .achv-list{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:12px;}
+  .achv-list li{
+    display:flex;gap:12px;font-size:14px;color:var(--text-muted);
+    padding:12px 14px;background:var(--bg-panel);border:1px solid var(--line);border-radius:var(--radius);
+  }
+  .achv-list li::before{content:"▸";color:var(--copper);flex-shrink:0;}
+
+  /* ---------- coursework: chip cards ---------- */
+  .course-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:40px;}
+  .course-card{
+    background:var(--bg-panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px;position:relative;
+  }
+  .course-card .pins{
+    position:absolute;top:0;left:24px;right:24px;height:1px;
+    background:repeating-linear-gradient(90deg,var(--line) 0 6px, transparent 6px 12px);
+  }
+  .course-code{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--cyan);letter-spacing:.06em;}
+  .course-card h3{font-size:19px;margin-top:8px;}
+  .course-card p{color:var(--text-muted);font-size:14px;margin:12px 0 16px;}
+  .skill-tags{display:flex;flex-wrap:wrap;gap:6px;}
+  .skill-tags span{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text-muted);border:1px solid var(--line);padding:4px 8px;border-radius:var(--radius);}
+  .course-link{display:inline-block;margin-top:14px;font-size:13px;font-family:'IBM Plex Mono',monospace;}
+
+  /* ---------- certifications ---------- */
+  .cert-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:40px;}
+  .cert-card{
+    background:var(--bg-panel);border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;display:flex;flex-direction:column;
+  }
+  .cert-image-wrap{
+    background:#fff;padding:8px;border-bottom:1px solid var(--line);
+  }
+  .cert-image-wrap img{width:100%;height:auto;display:block;border-radius:1px;}
+  .cert-body{padding:16px 20px 20px;display:flex;flex-direction:column;gap:8px;}
+  .cert-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+  .cert-badge{
+    font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--cyan);
+    border:1px solid var(--cyan);padding:3px 8px;border-radius:var(--radius);white-space:nowrap;
+  }
+  .cert-card h3{font-size:16px;line-height:1.3;}
+  .cert-meta{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-muted);}
+  .cert-card a{font-size:13px;font-family:'IBM Plex Mono',monospace;margin-top:2px;}
+
+  /* ---------- projects ---------- */
+  .project-list{display:grid;gap:28px;margin-top:40px;}
+  .project-card{
+    display:grid;grid-template-columns:.9fr 1.1fr;gap:0;
+    background:var(--bg-panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+  }
+  .project-media{
+    background:linear-gradient(160deg,var(--bg-panel-2),#11161d);
+    display:flex;align-items:center;justify-content:center;min-height:220px;
+    border-right:1px solid var(--line);
+  }
+  .project-media img{width:100%;height:100%;object-fit:cover;}
+  .project-media .ph-label{font-family:'IBM Plex Mono',monospace;color:var(--text-muted);font-size:12px;text-align:center;padding:20px;}
+  .project-body{padding:28px;}
+  .project-body .eyebrow{margin-bottom:10px;}
+  .project-body h3{font-size:21px;margin-bottom:10px;}
+  .project-body p{color:var(--text-muted);font-size:14.5px;}
+  .feat-list{margin:14px 0;padding-left:18px;color:var(--text-muted);font-size:14px;}
+  .feat-list li{margin-bottom:6px;}
+  .tool-row{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0;}
+  .tool-row span{font-family:'IBM Plex Mono',monospace;font-size:10.5px;background:var(--bg-panel-2);color:var(--copper);padding:5px 9px;border-radius:var(--radius);}
+  .project-links a{font-size:13px;font-family:'IBM Plex Mono',monospace;margin-right:16px;}
+
+  @media (max-width:720px){
+    .project-card{grid-template-columns:1fr;}
+    .project-media{border-right:none;border-bottom:1px solid var(--line);min-height:180px;}
+  }
+
+  /* ---------- journey timeline ---------- */
+  .timeline{position:relative;margin-top:48px;padding-left:32px;border-left:1px solid var(--line);}
+  .tl-item{position:relative;padding-bottom:44px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:"";position:absolute;left:-37px;top:4px;width:11px;height:11px;
+    border-radius:50%;background:var(--bg-deep);border:2px solid var(--cyan);
+  }
+  .tl-year{font-family:'IBM Plex Mono',monospace;color:var(--cyan);font-size:12px;letter-spacing:.06em;text-transform:uppercase;}
+  .tl-item h3{font-size:18px;margin:8px 0 8px;}
+  .tl-item p{color:var(--text-muted);font-size:14.5px;max-width:640px;}
+
+  /* ---------- contact ---------- */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px;}
+  .contact-card{background:var(--bg-panel);border:1px solid var(--line);border-radius:var(--radius);padding:28px;}
+  .contact-card h3{font-size:16px;margin-bottom:18px;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em;color:var(--text-muted);text-transform:uppercase;font-weight:500;}
+  .contact-line{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px dashed var(--line);font-size:14px;}
+  .contact-line:last-child{border-bottom:none;}
+  .contact-line span:first-child{color:var(--text-muted);font-family:'IBM Plex Mono',monospace;font-size:12px;}
+
+  form.contact-form{display:grid;gap:14px;}
+  form.contact-form label{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:6px;}
+  form.contact-form input, form.contact-form textarea{
+    width:100%;background:var(--bg-panel-2);border:1px solid var(--line);border-radius:var(--radius);
+    color:var(--text-primary);padding:12px 14px;font-family:'Inter',sans-serif;font-size:14px;
+  }
+  form.contact-form input:focus, form.contact-form textarea:focus{outline:2px solid var(--cyan);outline-offset:1px;}
+  form.contact-form button{
+    justify-self:start;margin-top:6px;background:var(--copper);color:#171008;border:none;
+    font-family:'IBM Plex Mono',monospace;font-weight:600;padding:12px 24px;border-radius:var(--radius);cursor:pointer;font-size:13px;
+  }
+  .form-note{font-size:12px;color:var(--text-muted);margin-top:10px;}
+
+  footer{padding:36px 0;text-align:center;color:var(--text-muted);font-family:'IBM Plex Mono',monospace;font-size:12px;}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:860px){
+    .tabs{display:none;}
+    .nav-toggle{display:block;}
+    .hero-grid{grid-template-columns:1fr;}
+    .photo-col{order:-1;max-width:260px;}
+    .about-grid{grid-template-columns:1fr;}
+    .course-grid{grid-template-columns:1fr;}
+    .cert-grid{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+    section{padding:64px 0;}
+  }
+  @media (max-width:860px){
+    .tabs.open{
+      display:flex;flex-direction:column;position:absolute;top:64px;left:0;right:0;
+      background:var(--bg-panel);border-bottom:1px solid var(--line);padding:8px;gap:2px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#home" class="nav-brand">&lt;<b>RMTV</b>/&gt;</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">≡</button>
+    <ul class="tabs" id="tabs">
+      <li><a class="tab" href="#home">Home</a></li>
+      <li><a class="tab" href="#about">About</a></li>
+      <li><a class="tab" href="#coursework">Coursework</a></li>
+      <li><a class="tab" href="#certifications">Certifications</a></li>
+      <li><a class="tab" href="#journey">Journey</a></li>
+      <li><a class="tab" href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ================= HOME / HERO ================= -->
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="kicker">Sheet 01 — Home</span>
+      <h1>Robinn Mil Vinas<br><span class="accent">Computer Engineering</span> Student</h1>
+      <p class="tagline">I am a Computer Engineering student who wants to learn, build, and improve through technology. My goal is to develop useful skills that can help me create practical solutions in the future.</p>
+
+      <div class="hero-meta">
+        <div>Year Level<b>1st Year</b></div>
+        <div>Program<b>BS Computer Engineering</b></div>
+        <div>School<b>Mapúa University</b></div>
+      </div>
+
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#coursework">View Coursework</a>
+        <a class="btn btn-ghost" href="#contact">Get In Touch</a>
+      </div>
+    </div>
+
+    <div class="photo-col">
+      <div class="photo-frame">
+        <img src="assets/photo.jpg" alt="Portrait of Robinn Mil Vinas">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="wrap">
+    <div class="eyebrow">Sheet 02 — About Me <span class="sheet-no">PROFILE.SPEC</span></div>
+    <h2 class="section-title">Background &amp; interests</h2>
+    <p class="lede">A closer look at who I am beyond the classroom — what pulled me into computer engineering and what I'm building toward.</p>
+
+    <div class="about-grid" style="margin-top:44px;">
+      <div class="datasheet">
+        <div class="datasheet-head">
+          <span>Student Spec Sheet</span>
+          <span>Rev. 2026</span>
+        </div>
+        <dl>
+          <div class="row"><dt>Name</dt><dd>Robinn Mil Vinas</dd></div>
+          <div class="row"><dt>Program</dt><dd>BS Computer Engineering</dd></div>
+          <div class="row"><dt>University</dt><dd>Mapúa University</dd></div>
+          <div class="row"><dt>Year Level</dt><dd>1st Year</dd></div>
+          <div class="row"><dt>Focus Area</dt><dd>Embedded Systems &amp; IoT</dd></div>
+          <div class="row"><dt>Hometown</dt><dd>Caloocan City</dd></div>
+          <div class="row"><dt>Status</dt><dd>Actively learning</dd></div>
+        </dl>
+      </div>
+
+      <div class="about-body">
+        <p><strong>I'm Robinn Mil Vinas,</strong> a first-year Computer Engineering student at Mapúa University, based in Caloocan City. I came into this course still unsure of exactly where I wanted to go after graduating from senior high school — my parents were the ones who encouraged me toward Computer Engineering, and that uncertainty ended up becoming part of my motivation: instead of coasting, I decided to work hard and figure out my direction along the way.</p>
+        <p>I'm interested in how hardware and software work together to create useful systems. I'm especially curious about embedded systems and IoT because they can be used to make everyday tasks easier and more efficient.</p>
+        <p>My goal is to improve my programming, problem-solving, and technical skills as I continue studying Computer Engineering. In the future, I want to work on projects that are practical, useful, and can help people.</p>
+
+        <ul class="achv-list">
+          <li>Consistent honor student since Grade 5</li>
+          <li>Currently exploring organizations and activities related to Computer Engineering</li>
+          <li>No internship/OJT yet — currently focused on building foundational skills as a student</li>
+        </ul>
+
+        <div class="chip-row">
+          <span class="chip">Still developing my skill set</span>
+          <span class="chip">Learning to program</span>
+          <span class="chip">Embedded Systems &amp; IoT</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COURSEWORK ================= -->
+<section id="coursework">
+  <div class="wrap">
+    <div class="eyebrow">Sheet 03 — Coursework <span class="sheet-no">CURRICULUM.LOG</span></div>
+    <h2 class="section-title">Courses that shaped my thinking</h2>
+    <p class="lede">Key subjects from the Mapúa CpE curriculum, what they covered, and the skills I picked up in each.</p>
+
+    <div class="course-grid">
+
+      <div class="course-card">
+        <div class="pins"></div>
+        <div class="course-code">CPE 101-4</div>
+        <h3>Computer Engineering as a Discipline</h3>
+        <p>An introduction to Computer Engineering as a field that combines hardware, software, and engineering problem-solving, and why it matters in the systems people rely on every day.</p>
+        <div class="skill-tags">
+          <span>CpE Fundamentals</span><span>Engineering Awareness</span><span>Technical Communication</span>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div class="pins"></div>
+        <div class="course-code">MATH 165</div>
+        <h3>College Algebra with Analytic Geometry</h3>
+        <p>This course covers algebraic concepts, equations, functions, and analytic geometry used in solving mathematical and engineering problems.</p>
+        <div class="skill-tags">
+          <span>Algebraic problem-solving</span><span>Analytical thinking</span><span>Applying math concepts</span>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div class="pins"></div>
+        <div class="course-code">MATH 166</div>
+        <h3>College Trigonometry with Solid Mensuration</h3>
+        <p>This course focuses on trigonometric concepts, measurements, angles, and geometric relationships used in mathematics and engineering.</p>
+        <div class="skill-tags">
+          <span>Trigonometric problem-solving</span><span>Measurement</span><span>Mathematical reasoning</span>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div class="pins"></div>
+        <div class="course-code">CM 011</div>
+        <h3>General Chemistry for Engineering</h3>
+        <p>This course introduces the basic concepts of chemistry, including matter, chemical reactions, measurements, and other principles related to engineering.</p>
+        <div class="skill-tags">
+          <span>Problem-solving</span><span>Calculations</span><span>Laboratory safety</span>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div class="pins"></div>
+        <a href="assets/coursework/cwts-poster.jpg" target="_blank" rel="noopener" style="display:block;margin:4px 0 16px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;">
+          <img src="assets/coursework/cwts-poster.jpg" alt="NSTP-CWTS Civic Welfare Training Service infographic poster by Robinn Mil Vinas" style="width:100%;height:220px;object-fit:cover;object-position:top;display:block;">
+        </a>
+        <div class="course-code">NSTP – CWTS</div>
+        <h3>Civic Welfare Training Service: Building Responsible and Community-Oriented Students</h3>
+        <p>An infographic poster explaining what CWTS is, the practical skills it builds (teamwork, leadership, first aid, disaster preparedness, environmental awareness), and how it connects to Computer Engineering through technology-based community solutions.</p>
+        <div class="skill-tags">
+          <span>Civic Responsibility</span><span>Visual Communication</span><span>Infographic Design</span>
+        </div>
+        <a class="course-link" href="assets/coursework/cwts-poster.jpg" target="_blank" rel="noopener">→ View full poster</a>
+      </div>
+
+      <div class="course-card">
+        <div class="pins"></div>
+        <div class="course-code">ACADEMIC VIDEO OUTPUT</div>
+        <h3>Interview Activity: Insights and Personal Experiences</h3>
+        <p>A video interview created for an academic activity, focusing on the interviewee's experiences, perspectives, and insights.</p>
+        <div class="skill-tags">
+          <span>Interviewing</span><span>Communication</span>
+        </div>
+        <a class="course-link" href="https://drive.google.com/file/d/16WbNYvldj3Ir2SK2ZtvYkapNgmTX5D2Q/view?usp=sharing" target="_blank" rel="noopener">→ Watch video</a>
+      </div>
+
+      <div class="course-card">
+        <div class="pins"></div>
+        <div class="course-code">ACADEMIC VIDEO OUTPUT</div>
+        <h3>Creative Video Production: Storytelling and Media</h3>
+        <p>A creative video output prepared for an academic activity, demonstrating planning, storytelling, and basic media production.</p>
+        <div class="skill-tags">
+          <span>Creativity</span><span>Media Production</span>
+        </div>
+        <a class="course-link" href="https://drive.google.com/file/d/1nk_WoYC1bZDbYWKaGq72O9X7fW3KIAcK/view?usp=sharing" target="_blank" rel="noopener">→ Watch video</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= CERTIFICATIONS ================= -->
+<section id="certifications">
+  <div class="wrap">
+    <div class="eyebrow">Sheet 04 — Certifications <span class="sheet-no">CERT.LOG</span></div>
+    <h2 class="section-title">Online certifications</h2>
+    <p class="lede">Courses completed outside the classroom through Coursera.</p>
+
+    <div class="cert-grid">
+
+      <div class="cert-card">
+        <div class="cert-image-wrap">
+          <img src="assets/certs/cert-learning-how-to-learn.jpg" alt="Coursera certificate: Learning How to Learn, issued to Robinn Mil Viñas by Deep Teaching Solutions">
+        </div>
+        <div class="cert-body">
+          <div class="cert-top">
+            <h3>Learning How to Learn: Powerful Mental Tools to Help You Master Tough Subjects</h3>
+            <span class="cert-badge">Coursera</span>
+          </div>
+          <div class="cert-meta">Deep Teaching Solutions · Completed Sep 29, 2026</div>
+          <a href="https://coursera.org/verify/U8LYKB886QQJ">Verify certificate →</a>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-image-wrap">
+          <img src="assets/certs/cert-technical-writing.jpg" alt="Coursera certificate: Introduction to Technical Writing, issued to Robinn Mil Viñas by Board Infinity">
+        </div>
+        <div class="cert-body">
+          <div class="cert-top">
+            <h3>Introduction to Technical Writing</h3>
+            <span class="cert-badge">Coursera</span>
+          </div>
+          <div class="cert-meta">Board Infinity · Completed Sep 30, 2026</div>
+          <a href="https://coursera.org/verify/V931RAQAJW6F">Verify certificate →</a>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-image-wrap">
+          <img src="assets/certs/cert-design-thinking.jpg" alt="Coursera certificate: Design Thinking for Innovation, issued to Robinn Mil Viñas by the Darden School of Business, University of Virginia">
+        </div>
+        <div class="cert-body">
+          <div class="cert-top">
+            <h3>Design Thinking for Innovation</h3>
+            <span class="cert-badge">Coursera</span>
+          </div>
+          <div class="cert-meta">Darden School of Business, University of Virginia · Completed Sep 24, 2026</div>
+          <a href="https://coursera.org/verify/RS03EV44CDDZ">Verify certificate →</a>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-image-wrap">
+          <img src="assets/certs/cert-foreign-policy.jpg" alt="Coursera certificate: Power and Foreign Policy in International Relations, issued to Robinn Mil Viñas by O.P. Jindal Global University">
+        </div>
+        <div class="cert-body">
+          <div class="cert-top">
+            <h3>Power and Foreign Policy in International Relations</h3>
+            <span class="cert-badge">Coursera</span>
+          </div>
+          <div class="cert-meta">O.P. Jindal Global University · Completed Sep 27, 2026</div>
+          <a href="https://coursera.org/verify/G6YCSF3F2Q3A">Verify certificate →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= PERSONAL JOURNEY ================= -->
+<section id="journey">
+  <div class="wrap">
+    <div class="eyebrow">Sheet 05 — Personal Journey <span class="sheet-no">LOG.ENTRY</span></div>
+    <h2 class="section-title">My first year in CpE so far</h2>
+    <p class="lede">A short reflection on how it's been, one year in.</p>
+
+    <div class="datasheet" style="margin-top:40px;max-width:720px;">
+      <div class="datasheet-head">
+        <span>Journal Entry</span>
+        <span>Year 1</span>
+      </div>
+      <div style="padding:22px 24px;">
+        <p style="color:var(--text-muted);margin:0;">My journey as a first-year Computer Engineering student at Mapúa University has been challenging but meaningful. Adjusting to the fast-paced environment was one of the biggest challenges I experienced, especially when I had to keep up with different subjects and activities. There were times when I felt overwhelmed and had difficulty understanding some lessons, but these experiences taught me to manage my time and study more independently. As I continue my studies, I am slowly becoming more comfortable with the workload and learning from my mistakes. My experience so far has helped me grow not only academically but also as a person.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="wrap">
+    <div class="eyebrow">Sheet 06 — Contact <span class="sheet-no">CONTACT.SPEC</span></div>
+    <h2 class="section-title">Let's connect</h2>
+    <p class="lede">Reach out about collaborations, opportunities, or just to talk engineering.</p>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <h3>Direct Channels</h3>
+        <div class="contact-line"><span>Email</span><span><a href="mailto:rmtvinas@mymail.mapua.edu.ph">rmtvinas@mymail.mapua.edu.ph</a></span></div>
+        <div class="contact-line"><span>Location</span><span>Caloocan City, Philippines</span></div>
+      </div>
+
+      <div class="contact-card">
+        <h3>Send a Message</h3>
+        <form class="contact-form" action="mailto:rmtvinas@mymail.mapua.edu.ph" method="POST" enctype="text/plain">
+          <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="Name" required>
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="Reply-to Email" required>
+          </div>
+          <div>
+            <label for="message">Message</label>
+            <textarea id="message" name="Message" rows="4" required></textarea>
+          </div>
+          <button type="submit">Send Message</button>
+        </form>
+        <p class="form-note">Opens your email app with the message addressed to rmtvinas@mymail.mapua.edu.ph. You still press send there.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Robinn Mil Vinas · BS Computer Engineering · Mapúa University
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const tabs = document.getElementById('tabs');
+  navToggle.addEventListener('click', () => {
+    const isOpen = tabs.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+  tabs.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    tabs.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }));
+</script>
+
+</body>
+</html>
